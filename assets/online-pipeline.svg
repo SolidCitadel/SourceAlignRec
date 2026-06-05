@@ -1,0 +1,51 @@
+<svg font-family="Pretendard, 'Noto Sans KR', -apple-system, sans-serif" viewBox="0 0 1120 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Attribute Form은 Hard Filter를 거쳐 후보 풀이 되고, 자연어 질의는 임베딩되어, 후보 풀과 질의가 유사도 검색에 함께 들어간다. OfferingProfile은 검색 벡터와 추천 근거의 이중 역할로 쓰인다. 유사도 검색이 상위 5개를 뽑으면 추천을 생성하고, 후속 질의는 tool calling으로 원문을 조회해 답한다">
+<rect x="-20" y="-20" width="1160" height="480" fill="#ffffff"/>
+<defs>
+<marker id="rah" markerWidth="7" markerHeight="7" refX="5.4" refY="2.5" orient="auto"><path d="M0,0 L5.4,2.5 L0,5 Z" fill="#4b5563"/></marker>
+</defs>
+<g fill="none" stroke="#4b5563" stroke-width="1.8">
+<path d="M320,56 L320,84" marker-end="url(#rah)"/>
+<path d="M320,126 L320,156" marker-end="url(#rah)"/>
+<path d="M320,196 L320,208 L460,208 L460,222" marker-end="url(#rah)"/>
+<path d="M680,56 L680,208 L540,208 L540,222" marker-end="url(#rah)"/>
+<path d="M500,268 L500,300" marker-end="url(#rah)"/>
+<path d="M690,250 L588,250" marker-end="url(#rah)"/>
+<path d="M690,322 L600,322" marker-end="url(#rah)"/>
+<path d="M500,346 L500,378" marker-end="url(#rah)"/>
+<path d="M690,401 L600,401" marker-end="url(#rah)"/>
+</g>
+<rect x="236" y="14" width="168" height="42" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="320" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">Attribute Form</text>
+<text x="320" y="49" text-anchor="middle" font-size="11" fill="#4b5563">구조화 다중선택</text>
+<rect x="598" y="14" width="164" height="42" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="680" y="33" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">자연어 질의</text>
+<text x="680" y="49" text-anchor="middle" font-size="11" fill="#4b5563">topic·스타일·동기</text>
+<text x="692" y="150" text-anchor="start" font-size="10.5" fill="#9ca3af">질의 임베딩</text>
+<rect x="236" y="84" width="168" height="42" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="320" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">Hard Filter</text>
+<text x="320" y="119" text-anchor="middle" font-size="10.5" fill="#4b5563">불일치만 제외 · 미확인 보존</text>
+<rect x="246" y="156" width="148" height="40" rx="12" fill="#eef0f3" stroke="#9ca3af" stroke-width="1"/>
+<text x="320" y="174" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1f2e">후보 풀</text>
+<text x="320" y="188" text-anchor="middle" font-size="9.5" fill="#4b5563">필터 통과 과목</text>
+<rect x="412" y="222" width="176" height="46" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="500" y="243" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">유사도 검색</text>
+<text x="500" y="259" text-anchor="middle" font-size="10.5" fill="#4b5563">후보 풀에서 상위 5개</text>
+<rect x="368" y="300" width="3" height="46" fill="#b8312a"/>
+<text x="354" y="321" text-anchor="end" font-size="12" font-weight="700" fill="#b8312a">초기 추천</text>
+<rect x="368" y="378" width="3" height="46" fill="#b8312a"/>
+<text x="354" y="399" text-anchor="end" font-size="12" font-weight="700" fill="#b8312a">후속 대화</text>
+<rect x="400" y="300" width="200" height="46" rx="8" fill="#ffffff" stroke="#b8312a" stroke-width="1.5"/>
+<text x="500" y="321" text-anchor="middle" font-size="15" font-weight="700" fill="#b8312a">추천 생성</text>
+<text x="500" y="337" text-anchor="middle" font-size="10.5" fill="#4b5563">LLM이 후보 중 3개 선정 · 추천 이유 생성</text>
+<rect x="400" y="378" width="200" height="46" rx="8" fill="#ffffff" stroke="#b8312a" stroke-width="1.5"/>
+<text x="500" y="399" text-anchor="middle" font-size="14" font-weight="700" fill="#b8312a">후속 질의 응답</text>
+<text x="500" y="415" text-anchor="middle" font-size="10.5" fill="#4b5563">LLM이 tool calling으로 원문 근거 확보</text>
+<rect x="690" y="224" width="180" height="122" rx="8" fill="#fdf3f1" stroke="#b8312a" stroke-width="1.2"/>
+<text x="780" y="280" text-anchor="middle" font-size="14" font-weight="700" fill="#b8312a">OfferingProfile</text>
+<text x="780" y="298" text-anchor="middle" font-size="10.5" fill="#4b5563">사전 구축 요약·임베딩</text>
+<text x="639" y="244" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8312a">검색 벡터</text>
+<text x="645" y="316" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8312a">추천 근거</text>
+<rect x="690" y="378" width="180" height="46" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="780" y="399" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a1f2e">Grounding tool</text>
+<text x="780" y="415" text-anchor="middle" font-size="10" fill="#4b5563">get_reviews · get_syllabus</text>
+</svg>

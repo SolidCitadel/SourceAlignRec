@@ -1,0 +1,64 @@
+<svg font-family="Pretendard, 'Noto Sans KR', -apple-system, sans-serif" viewBox="0 0 1120 472" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReviewClassifier가 AttributeExtractor와 DynamicScore로 분기해 OfferingAttribute·OfferingProfile를 만들고, 저장 후 online에서 Hard Filter와 Retrieval 두 트랙으로 소비되어 추천을 생성하고 후속 질의에 답한다">
+<rect x="-20" y="-20" width="1160" height="512" fill="#ffffff"/>
+<defs>
+<marker id="ah" markerWidth="7" markerHeight="7" refX="5.4" refY="2.5" orient="auto"><path d="M0,0 L5.4,2.5 L0,5 Z" fill="#4b5563"/></marker>
+</defs>
+<rect x="0" y="0" width="1120" height="272" rx="18" fill="#eef0f3"/>
+<rect x="0" y="300" width="1120" height="172" rx="18" fill="#fdf3f1"/>
+<rect x="14" y="16" width="4" height="240" rx="2" fill="#9ca3af"/>
+<rect x="14" y="312" width="4" height="150" rx="2" fill="#b8312a"/>
+<text x="32" y="27" font-size="11.5" font-weight="700" letter-spacing="0.07em" fill="#b8312a">OFFLINE · 구조화</text>
+<text x="32" y="323" font-size="11.5" font-weight="700" letter-spacing="0.07em" fill="#b8312a">ONLINE · 추천·응답</text>
+<g fill="none" stroke="#4b5563" stroke-width="1.8">
+<path d="M470,49 L470,78" marker-end="url(#ah)"/>
+<path d="M470,122 L470,135 L300,135 L300,150" marker-end="url(#ah)"/>
+<path d="M470,122 L470,135 L820,135 L820,150" marker-end="url(#ah)"/>
+<path d="M300,194 L300,222" marker-end="url(#ah)"/>
+<path d="M820,194 L820,222" marker-end="url(#ah)"/>
+<path d="M700,49 L700,244 L734,244" marker-end="url(#ah)"/>
+<path d="M300,266 L300,328" marker-end="url(#ah)"/>
+<path d="M820,266 L820,328" marker-end="url(#ah)"/>
+<path d="M504,350 L384,350" marker-end="url(#ah)"/>
+<path d="M616,350 L734,350" marker-end="url(#ah)"/>
+<path d="M300,372 L300,390 L560,390 L560,408" marker-end="url(#ah)"/>
+<path d="M820,372 L820,390 L560,390 L560,408" marker-end="url(#ah)"/>
+<path d="M632,430 L736,430" marker-end="url(#ah)"/>
+</g>
+<text x="560" y="288" text-anchor="middle" font-size="11.5" font-weight="600" fill="#9ca3af">구조화 근거 저장</text>
+<g>
+<rect x="418" y="11" width="104" height="38" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="470" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">강의평</text>
+<rect x="645" y="11" width="110" height="38" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="700" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">강의계획서</text>
+<rect x="386" y="78" width="168" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="470" y="97" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">ReviewClassifier</text>
+<text x="470" y="113" text-anchor="middle" font-size="11" fill="#4b5563">유형 분류 · p-score</text>
+<rect x="216" y="150" width="168" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="300" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">AttributeExtractor</text>
+<text x="300" y="185" text-anchor="middle" font-size="11" fill="#4b5563">속성 추출</text>
+<rect x="736" y="150" width="168" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="820" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">DynamicScore</text>
+<text x="820" y="185" text-anchor="middle" font-size="11" fill="#4b5563">대표 리뷰 선정</text>
+<rect x="216" y="222" width="168" height="44" rx="8" fill="#ffffff" stroke="#b8312a" stroke-width="1.5"/>
+<text x="300" y="241" text-anchor="middle" font-size="14" font-weight="700" fill="#b8312a">OfferingAttribute</text>
+<text x="300" y="257" text-anchor="middle" font-size="11" fill="#4b5563">속성 집계</text>
+<rect x="734" y="222" width="172" height="44" rx="8" fill="#ffffff" stroke="#b8312a" stroke-width="1.5"/>
+<text x="820" y="241" text-anchor="middle" font-size="14" font-weight="700" fill="#b8312a">OfferingProfile</text>
+<text x="820" y="257" text-anchor="middle" font-size="11" fill="#4b5563">근거 종합 · 임베딩</text>
+<rect x="504" y="328" width="112" height="44" rx="8" fill="#ffffff" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="560" y="347" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">학생 입력</text>
+<text x="560" y="363" text-anchor="middle" font-size="11" fill="#4b5563">질의 · 조건</text>
+<rect x="216" y="328" width="168" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="300" y="347" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">Hard Filter</text>
+<text x="300" y="363" text-anchor="middle" font-size="11" fill="#4b5563">속성 조건</text>
+<rect x="734" y="328" width="172" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="820" y="347" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">Retrieval</text>
+<text x="820" y="363" text-anchor="middle" font-size="11" fill="#4b5563">OfferingProfile 검색</text>
+<rect x="488" y="408" width="144" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="560" y="427" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">추천 생성</text>
+<text x="560" y="443" text-anchor="middle" font-size="11" fill="#4b5563">추천 이유 포함</text>
+<rect x="736" y="408" width="168" height="44" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+<text x="820" y="427" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1f2e">후속 질의 응답</text>
+<text x="820" y="443" text-anchor="middle" font-size="11" fill="#4b5563">원문 조회</text>
+</g>
+</svg>

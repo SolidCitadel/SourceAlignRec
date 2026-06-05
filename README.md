@@ -34,31 +34,11 @@ frontend/   Vite + React 19 + TypeScript + react-router 7 + TanStack Query + Zus
 
 강의계획서 + 강의평을 구조화해 두고(Offline), 사용자 요청 시 필터링·유사도 검색·LLM 추천을 수행(Online)하는 구조. 엣지케이스 처리와 맥락 유지는 LLM의 추론 능력에 위임하고, 알고리즘 기반 점수 합산은 최소화한다.
 
+<img src="assets/architecture.svg" alt="통합 아키텍처: ReviewClassifier가 AttributeExtractor와 DynamicScore로 분기해 OfferingAttribute·OfferingProfile를 만들고, 저장 후 online에서 Hard Filter와 Retrieval 두 트랙으로 소비되어 추천을 생성하고 후속 질의에 답한다" width="100%">
+
 ### Offline Pipeline — 강의 소스 구조화
 
 과목 데이터가 추가·변경될 때 실행. 결과는 DB에 저장.
-
-```mermaid
-flowchart TD
-    A(["강의평 목록"]) --> B["ReviewClassifier"]
-    B --> C["Noise 필터"]
-    B --> D["AttributeExtractor"]
-    D --> RA[("ReviewAttribute")]
-    RA --> F["Attribute 집계 (다수결)"]
-    F --> OA[("OfferingAttribute")]
-    SYL(["강의계획서"]) --> SA["exam_weight 파생"]
-    SA --> OA
-    C --> EMB["리뷰 임베딩"]
-    EMB --> G["대표 리뷰 선정\nDynamicScore"]
-    G --> RR[("RepresentativeReview")]
-    RR --> PR["교수 대표 리뷰 선정"]
-    PR --> PRR[("ProfessorRepresentativeReview")]
-    RR --> J["OfferingProfile 생성\n(LLM 요약)"]
-    PRR --> J
-    SYL --> J
-    J --> OP[("OfferingProfile")]
-    OP --> L["임베딩 → VectorDB"]
-```
 
 **ReviewClassifier** — `skt/A.X-Encoder-base` 기반 BERT fine-tuning multi-label 분류. 각 리뷰에 7개 타입(`grading` / `exam` / `assignment` / `attendance` / `teaching` / `topic` / `professor`) 레이블과 p-score를 부여하고, 어떤 타입에도 해당하지 않는 리뷰는 Noise로 필터링한다.
 
@@ -85,25 +65,7 @@ $$\text{DynamicScore}(r) = \left(\sum_{i \notin S_{\text{covered}}} P_i(r) + \la
 
 사용자 요청마다 실행.
 
-```mermaid
-flowchart TD
-    UP(["User Profile"]) -->|"사전 제외"| Pool
-
-    Input(["사용자 입력"]) --> Form["Attribute Form"]
-    Input --> NL["자연어 질의"]
-
-    Form --> HF["Hard Filter"]
-    HF --> Pool["후보 과목 풀"]
-
-    NL --> Emb["임베딩"]
-    Emb --> Search["유사도 검색"]
-    Pool --> Search
-
-    Search --> SL["Shortlist"]
-    SL --> Ctx[("OfferingProfile + Attribute")]
-    Ctx --> LLM["LLM\n(대화 turn에서 get_reviews · get_syllabus 사용 가능)"]
-    LLM --> Result(["추천 결과"])
-```
+<img src="assets/online-pipeline.svg" alt="Online 파이프라인: Attribute Form은 Hard Filter를 거쳐 후보 풀이 되고, 자연어 질의는 임베딩되어 후보 풀과 함께 유사도 검색에 들어간다. OfferingProfile은 검색 벡터와 추천 근거의 이중 역할로 쓰인다. 유사도 검색이 상위 5개를 뽑으면 추천을 생성하고, 후속 질의는 tool calling으로 원문을 조회해 답한다" width="100%">
 
 - **Hard Filter** — Attribute Form 다중 선택값에 해당하지 않는 과목만 제외. 속성 미확인 과목은 항상 포함.
 - **Shortlist** — 자연어 질의 임베딩과 OfferingProfile 임베딩의 유사도 상위 후보를 LLM에게 일괄 전달.
