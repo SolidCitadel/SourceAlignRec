@@ -1,0 +1,398 @@
+.shell {
+  min-height: 100vh;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Nav === */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 56px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandName {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.navLogin {
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  text-decoration: none;
+}
+
+.navLogin:hover {
+  color: var(--color-ink);
+}
+
+/* === Hero === */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  padding: 72px 56px 48px;
+  align-items: center;
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.betaPill {
+  align-self: flex-start;
+  padding: 6px 12px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.heroTitle {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0 0 18px;
+  color: var(--color-ink);
+}
+
+.heroAccent {
+  color: var(--color-primary);
+}
+
+.heroSub {
+  font-size: 17px;
+  color: var(--color-ink-dim);
+  line-height: 1.55;
+  margin: 0 0 32px;
+  max-width: 460px;
+}
+
+.heroCta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.heroCtaNote {
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  margin-left: 8px;
+}
+
+/* === HeroArt === */
+.art {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.artBg {
+  position: absolute;
+  inset: 0;
+}
+
+.artCard {
+  position: absolute;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 18px;
+}
+
+.artCard1 {
+  left: 13%;
+  top: 6%;
+  width: 56%;
+  padding: 14px;
+  transform: rotate(-2deg);
+}
+
+.artCard2 {
+  left: 30%;
+  top: 28%;
+  width: 60%;
+  transform: rotate(3deg);
+}
+
+.artCard3 {
+  left: 6%;
+  top: 56%;
+  width: 60%;
+  transform: rotate(-6deg);
+}
+
+.artScheduleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.artScheduleTitle {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.artScheduleMeta {
+  font-size: 11px;
+  color: var(--color-ink-dim);
+}
+
+.artGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  height: 120px;
+}
+
+.artCol {
+  background: var(--color-bg);
+  border-radius: 6px;
+  position: relative;
+}
+
+.artBlock {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 4px;
+}
+
+.artBlockInk {
+  background: var(--color-ink);
+}
+
+.artBlockPrimary {
+  background: var(--color-primary);
+}
+
+.artBlockSun {
+  background: #dcc8ae;
+}
+
+.artChipRow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.artChip {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.artChipPrimary {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.artChipNeutral {
+  background: #f4ece1;
+  color: var(--color-ink-dim);
+  font-weight: 500;
+}
+
+.artReviewBody {
+  font-size: 13px;
+  color: var(--color-ink);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.artReviewMeta {
+  font-size: 11px;
+  color: var(--color-ink-subtle);
+  margin-top: 8px;
+}
+
+.artAiLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.artAiUserRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.artAiAvatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #f4ece1;
+  flex: 0 0 22px;
+}
+
+.artAiUserBubble {
+  padding: 8px;
+  background: #f4ece1;
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--color-ink);
+}
+
+.artAiRec {
+  padding: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.artAiRecName {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.artAiRecMeta {
+  opacity: 0.9;
+  font-size: 11px;
+}
+
+/* === Features (HOW IT WORKS) === */
+.features {
+  padding: 40px 56px 72px;
+}
+
+.featuresLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.featuresHead {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 32px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.featureCard {
+  padding: 24px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-base);
+}
+
+.featureIcon {
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary-soft);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.featureNum {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-ink-subtle);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.featureTitle {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+.featureBody {
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* === Footer === */
+.footer {
+  padding: 24px 56px;
+  border-top: 1px solid var(--color-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerCopy {
+  font-size: 12px;
+  color: var(--color-ink-subtle);
+}
+
+.footerLinks {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  color: var(--color-ink-dim);
+}
+
+@media (max-width: 880px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 48px 24px;
+  }
+  .art {
+    max-width: 360px;
+  }
+  .heroTitle {
+    font-size: 44px;
+  }
+  .features {
+    padding: 32px 24px;
+  }
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  .nav,
+  .footer {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

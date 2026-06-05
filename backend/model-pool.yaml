@@ -1,0 +1,145 @@
+version: model-pool.v1
+
+endpoints:
+  - endpoint_id: lmstudio
+    provider_kind: openai-compatible
+    base_url_env: LMSTUDIO_BASE_URL
+    api_key_env: LMSTUDIO_API_KEY
+    concurrency_limit: 2
+
+  - endpoint_id: groq
+    provider_kind: openai-compatible
+    base_url_env: GROQ_BASE_URL
+    api_key_env: GROQ_API_KEY
+    concurrency_limit: 1
+
+  - endpoint_id: cerebras
+    provider_kind: openai-compatible
+    base_url_env: CEREBRAS_BASE_URL
+    api_key_env: CEREBRAS_API_KEY
+    concurrency_limit: 1
+
+  - endpoint_id: google
+    provider_kind: openai-compatible
+    base_url_env: GOOGLE_BASE_URL
+    api_key_env: GOOGLE_API_KEY
+    concurrency_limit: 1
+
+  - endpoint_id: chat-khu
+    provider_kind: openai-compatible
+    base_url_env: CHATKHU_BASE_URL
+    api_key_env: CHATKHU_API_KEY
+    concurrency_limit: 5
+
+  - endpoint_id: openrouter
+    provider_kind: openai-compatible
+    base_url_env: OPENROUTER_BASE_URL
+    api_key_env: OPENROUTER_API_KEY
+    concurrency_limit: 1
+
+models:
+  - model_id: lmstudio/qwen3.5-9b
+    family: llm
+    endpoint_id: lmstudio
+    model_name: qwen/qwen3.5-9b
+    context_window: 4096
+    memo: 로컬
+
+  - model_id: lmstudio/qwen3.6-35b-a3b
+    family: llm
+    endpoint_id: lmstudio
+    model_name: qwen/qwen3.6-35b-a3b
+    context_window: 4096
+    memo: 로컬
+
+  - model_id: groq/gpt-oss-120b
+    family: llm
+    endpoint_id: groq
+    model_name: openai/gpt-oss-120b
+    context_window: 131072
+    rpm: 30
+    rpd: 1000
+    tpm: 8000
+    tpd: 200000
+    memo: tool calling + structured output 호환 안됨
+
+  - model_id: groq/qwen3-32b
+    family: llm
+    endpoint_id: groq
+    model_name: qwen/qwen3-32b
+    context_window: 131072
+    rpm: 60
+    rpd: 1000
+    tpm: 6000
+    tpd: 500000
+    memo:
+
+  - model_id: cerebras/gpt-oss-120b
+    family: llm
+    endpoint_id: cerebras
+    model_name: gpt-oss-120b
+    context_window: 65536
+    rpm: 5
+    rph: 150
+    rpd: 2400
+    tpm: 30000
+    tph: 1000000
+    tpd: 1000000
+    memo: 임의로 빈도 제한될 수 있음 (rps)
+
+  - model_id: chat-khu/gpt-oss-120b
+    family: llm
+    endpoint_id: chat-khu
+    model_name: accounts/fireworks/models/gpt-oss-120b
+    context_window: 128000
+    memo: 1크레딧 / 10K
+
+  - model_id: chat-khu/grok-4.1-fast
+    family: llm
+    endpoint_id: chat-khu
+    model_name: grok-4-1-fast
+    context_window: 2000000
+    memo: 2크레딧 / 10K
+
+  - model_id: chat-khu/gemini-3-flash-preview
+    family: llm
+    endpoint_id: chat-khu
+    model_name: gemini-3-flash-preview
+    context_window: 1000000
+    memo: 5크레딧 / 10K
+
+  - model_id: openrouter/gpt-oss-120b
+    family: llm
+    endpoint_id: openrouter
+    model_name: openai/gpt-oss-120b:free
+    context_window: 128000
+    rpm: 20
+    rpd: 1000
+    memo: 무료
+
+  - model_id: openrouter/gpt-oss-120b:paid
+    family: llm
+    endpoint_id: openrouter
+    model_name: openai/gpt-oss-120b:floor
+    context_window: 128000
+    memo: 유료
+
+  - model_id: google/gemini-3.1-flash-lite
+    family: llm
+    endpoint_id: google
+    model_name: gemini-flash-lite-latest  # 별칭 — preview deprecated 회피, 항상 최신 flash-lite
+    context_window: 1000000
+    rpm: 15
+    tpm: 250000
+    rpd: 500
+    memo: 무료. model_id는 호환 위해 유지(실체는 flash-lite-latest 별칭)
+
+  - model_id: openrouter/deepseek-v4-flash
+    family: llm
+    endpoint_id: openrouter
+    model_name: deepseek/deepseek-v4-flash
+    context_window: 1000000
+    memo: 0.1$ / 0.2$
+
+  # 임베딩은 model-pool 경유하지 않음 — core.embedder(in-process)가 정본.
+  # (deployment-implementation.md 1단계: 임베딩은 DB에 고정돼 갈아끼우기 불가 → model_pool=chat 전용)

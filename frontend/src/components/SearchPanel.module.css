@@ -1,0 +1,10 @@
+.panel {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-base);
+  overflow: hidden;
+}

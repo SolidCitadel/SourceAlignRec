@@ -1,0 +1,71 @@
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+  transition:
+    background 120ms ease,
+    color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.full {
+  display: flex;
+  width: 100%;
+}
+
+.s-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+.s-md {
+  padding: 9px 16px;
+  font-size: 13px;
+}
+.s-lg {
+  padding: 13px 22px;
+  font-size: 15px;
+}
+
+.v-default:hover:not(:disabled) {
+  background: var(--color-bg);
+}
+
+.v-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(201, 100, 66, 0.22);
+}
+.v-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.v-danger {
+  background: var(--color-danger);
+  color: #fff;
+  border-color: transparent;
+}
+.v-danger:hover:not(:disabled) {
+  filter: brightness(0.95);
+}

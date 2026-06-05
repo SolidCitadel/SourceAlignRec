@@ -1,0 +1,243 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-ink);
+}
+
+.termSelect {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-line);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.termSelect:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.body {
+  flex: 1;
+  padding: 24px 36px 60px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-base);
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.statGrid {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.statBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-ink-dim);
+}
+
+.statValue {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+.statWarn {
+  color: var(--color-warn, #c98a3a);
+}
+
+.statOk {
+  color: var(--color-ok);
+}
+
+.statDim {
+  color: var(--color-ink-dim);
+}
+
+.runAllRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--color-ink-dim);
+}
+
+.empty {
+  padding: 18px 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-ink-dim);
+}
+
+.stateMsg {
+  padding: 60px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-ink-dim);
+}
+
+.pipelineTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.pipelineRow {
+  display: grid;
+  grid-template-columns: 2fr 80px 80px 80px 130px 90px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 4px;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.pipelineHeadRow {
+  border-top: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--color-bg-alt);
+  padding: 8px 4px;
+  border-radius: 6px;
+}
+
+.stepName {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.termBadge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-dim);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-line-soft);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.numCol {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-ink);
+  text-align: right;
+}
+
+.lastRun {
+  color: var(--color-ink-dim);
+  font-size: 11px;
+}
+
+.pendingWarn {
+  font-weight: 700;
+  color: var(--color-warn, #c98a3a);
+}
+
+.actionCol {
+  display: flex;
+  justify-content: center;
+}
+
+.runNotice {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-dim);
+  white-space: nowrap;
+}
+
+.logList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.logRow {
+  display: grid;
+  grid-template-columns: 150px 1fr 70px 24px;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.logTime {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-dim);
+}
+
+.logTask {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-ink);
+}
+
+.logDuration {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-dim);
+  text-align: right;
+}
+
+.logOk {
+  color: var(--color-ok);
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}
+
+.logFail {
+  color: var(--color-danger);
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}

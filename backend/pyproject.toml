@@ -1,0 +1,71 @@
+[project]
+name = "sourcealignrec"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "fastmcp>=2.0",
+    "sqlmodel>=0.0.21",
+    "psycopg[binary]>=3.2",
+    "pgvector>=0.3",
+    "pydantic-settings>=2.6",
+    "python-dotenv>=1.0",
+    "openai>=1.0",
+    "pyyaml>=6.0",
+    "setfit>=1.0",
+    "datasets>=2.0",
+    "iterative-stratification>=0.1.7",
+    "scikit-learn>=1.4",
+    "transformers>=4.40,<5.0",
+    "torch>=2.0",
+    "pyjwt>=2.8",
+    "bcrypt>=4.1",
+    "email-validator>=2.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+sar-ingest = "sourcealignrec.offline.ingestion.ingest:main"
+sar-ingest-departments = "sourcealignrec.offline.ingestion.ingest_departments:main"
+sar-backfill-meta = "sourcealignrec.offline.ingestion.backfill_meta:main"
+sar-grant-admin = "sourcealignrec.admin.grant_admin:main"
+sar-label-reviews = "sourcealignrec.offline.classifier.label_reviews:main"
+sar-dump-type-candidates = "sourcealignrec.offline.classifier.dump_type_candidates:main"
+sar-import-type-labels = "sourcealignrec.offline.classifier.import_type_labels:main"
+sar-train-setfit = "sourcealignrec.offline.classifier.train_setfit:main"
+sar-split-type-labels = "sourcealignrec.offline.classifier.split_type_labels:main"
+sar-train-bert = "sourcealignrec.offline.classifier.train_bert:main"
+sar-eval-llm = "sourcealignrec.offline.classifier.eval_llm:main"
+sar-eval-attr = "sourcealignrec.offline.eval.eval_attr_extractor:main"
+sar-classify-reviews = "sourcealignrec.offline.classifier.classify_reviews:main"
+sar-extract-attrs = "sourcealignrec.offline.extractor.extract_attributes:main"
+sar-dump-attr-candidates = "sourcealignrec.offline.extractor.dump_attr_candidates:main"
+sar-import-attr-labels = "sourcealignrec.offline.extractor.import_attr_labels:main"
+sar-train-attr = "sourcealignrec.offline.extractor.train_attr_extractor:main"
+sar-embed-reviews = "sourcealignrec.offline.selector.embed_reviews:main"
+sar-select-reviews = "sourcealignrec.offline.selector.select_reviews:main"
+sar-select-professor-reviews = "sourcealignrec.offline.selector.select_professor_reviews:main"
+sar-build-profiles = "sourcealignrec.offline.profiler.build_offering_profiles:main"
+sar-build-professor-profiles = "sourcealignrec.offline.profiler.build_professor_profiles:main"
+sar-build-search-embeddings = "sourcealignrec.offline.profiler.build_search_embeddings:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sourcealignrec"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu124" }
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true

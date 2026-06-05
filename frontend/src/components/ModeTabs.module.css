@@ -1,0 +1,32 @@
+.bar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-surface);
+  padding: 0 22px;
+  flex: 0 0 auto;
+}
+
+.tab {
+  padding: 14px 4px;
+  margin-right: 24px;
+  margin-bottom: -1px;
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink-dim);
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: var(--color-ink);
+}
+
+.active {
+  font-weight: 700;
+  color: var(--color-ink);
+  border-bottom-color: var(--color-primary);
+}

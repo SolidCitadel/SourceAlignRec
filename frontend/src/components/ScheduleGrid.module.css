@@ -1,0 +1,227 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-base);
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.titleRow {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.summary {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-ink-dim);
+}
+
+.grid {
+  flex: 1;
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px repeat(5, 1fr);
+  grid-template-rows: 22px repeat(10, minmax(0, 1fr));
+  min-height: 0;
+}
+
+.dayLabel {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-dim);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.hourLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-ink-subtle);
+  padding: 0 6px;
+  text-align: right;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.cell {
+  border-top: 1px solid var(--color-line-soft);
+  border-left: 1px solid var(--color-line-soft);
+}
+
+.blocks {
+  position: absolute;
+  top: 22px;
+  left: 36px;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.block {
+  position: absolute;
+  width: calc(20% - 4px);
+  border-radius: 10px;
+  padding: 6px 8px;
+  overflow: hidden;
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.25;
+  pointer-events: auto;
+}
+
+.blockRemove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-ink);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 80ms ease, background 80ms ease;
+}
+
+.block:hover .blockRemove {
+  opacity: 1;
+}
+
+.blockRemove:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.v-ink {
+  background: var(--color-ink);
+  color: #fff;
+}
+
+.v-primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(201, 100, 66, 0.2);
+}
+
+.v-muted {
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
+}
+
+.blockTitle {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.blockSub {
+  opacity: 0.85;
+  font-size: 11px;
+}
+
+.blockTag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* 온라인·시간미정 — 그리드 밖 하단 영역 */
+.unplaced {
+  flex: 0 0 auto;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-line);
+}
+
+.unplacedLabel {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-dim);
+  margin-bottom: 8px;
+}
+
+.unplacedList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.unplacedItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  padding: 6px 8px 6px 10px;
+}
+
+.unplacedBody {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  line-height: 1.3;
+}
+
+.unplacedName {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.unplacedSub {
+  font-size: 11px;
+  color: var(--color-ink-dim);
+}
+
+.unplacedRemove {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-ink-dim);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 80ms ease, color 80ms ease;
+}
+
+.unplacedRemove:hover {
+  background: var(--color-danger);
+  color: #fff;
+}

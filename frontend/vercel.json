@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "http://coursehub-api.kro.kr:8000/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

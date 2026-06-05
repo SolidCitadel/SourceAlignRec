@@ -1,0 +1,15 @@
+# 백엔드 HTTPS reverse proxy — Caddy 자동 Let's Encrypt TLS.
+# coursehub-api.kro.kr → backend:8000 (compose 내부 네트워크).
+# 전제: coursehub-api.kro.kr A레코드 → Oracle IP, 80/443 인바운드 허용.
+coursehub-api.kro.kr {
+	reverse_proxy backend:8000
+}
+
+# docgraph.kro.kr → 별도 compose. 이 caddy를 공용 443 ingress로 공유한다.
+# upstream은 별도 compose 네트워크라 서비스명으로 못 닿음 → 호스트가 publish한
+# 8080 포트로 host.docker.internal 경유(compose의 extra_hosts: host-gateway 필요).
+# 전제: docgraph.kro.kr A레코드 → Oracle IP. upstream이 아직 없어도 인증서는
+# 발급되고(ACME는 upstream 무관), 붙기 전 요청은 502.
+docgraph.kro.kr {
+	reverse_proxy host.docker.internal:8080
+}

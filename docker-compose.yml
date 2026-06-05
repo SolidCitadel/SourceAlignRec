@@ -1,0 +1,60 @@
+name: sourcealignrec
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sourcealignrec
+      POSTGRES_USER: sar
+      POSTGRES_PASSWORD: sar
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    # 로컬은 build, 배포(Oracle arm64)는 GHCR pull: docker compose pull backend && up --no-build
+    image: ghcr.io/solidcitadel/sourcealignrec-backend:latest
+    restart: unless-stopped
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    # DATABASE_URL은 compose 내부 host(db 서비스명)로 override — env_file의 localhost보다 우선.
+    environment:
+      DATABASE_URL: postgresql+psycopg://sar:sar@db:5432/sourcealignrec
+    # 모델 endpoint 키·SAR_JWT_SECRET·SAR_CORS_ORIGINS 등은 인스턴스 .env에서 주입.
+    env_file:
+      - ./backend/.env
+    # model-pool.yaml을 이미지에서 분리 — 모델 변경(deprecated 대응) 시 재빌드 없이 yaml 수정+재기동.
+    volumes:
+      - ./backend/model-pool.yaml:/app/model-pool.yaml:ro
+    ports:
+      - "8000:8000"
+
+  # 백엔드 HTTPS reverse proxy — coursehub-api.kro.kr → backend:8000, 자동 LE TLS.
+  # 설정은 루트 Caddyfile, 인증서는 caddy_data 볼륨에 영속(재기동 시 LE 재발급 없음).
+  # 공개 HTTPS(/version·/mcp 등)는 이 컨테이너 경유 — 멈추면 443 전체가 끊긴다.
+  # 로컬 dev는 이 서비스를 기동하지 않는다(just dev는 db만 띄움).
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - backend
+    # docgraph.kro.kr를 별도 compose로 라우팅 — 호스트 publish 포트(8080)에 닿기 위해
+    # host.docker.internal을 호스트 게이트웨이로 매핑. (Linux/Oracle에선 명시 필요.)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

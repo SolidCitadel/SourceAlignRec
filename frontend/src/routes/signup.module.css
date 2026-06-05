@@ -1,0 +1,304 @@
+.shell {
+  min-height: 100vh;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 56px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandName {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.body {
+  padding: 48px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === Stepper === */
+.stepper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepNode {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.stepNodeNext {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-line);
+  color: var(--color-ink-dim);
+}
+
+.stepLabel {
+  font-size: 11px;
+  color: var(--color-ink-dim);
+  font-weight: 500;
+}
+
+.stepLabelActive {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.stepConnector {
+  width: 48px;
+  height: 1.5px;
+  background: var(--color-line);
+  margin-top: -16px;
+}
+
+.stepConnectorDone {
+  background: var(--color-primary);
+}
+
+/* === Card === */
+.card {
+  width: 540px;
+  max-width: 100%;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-base);
+  padding: 32px;
+  border: 1px solid var(--color-line);
+}
+
+.stepBadge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.stepTitle {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+
+.stepHelp {
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  margin: 0 0 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-dim);
+}
+
+.input,
+.select {
+  width: 100%;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-ink);
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* School card */
+.schoolList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schoolCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.schoolCardSelected {
+  border: 1.8px solid var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.schoolCardDisabled {
+  opacity: 0.55;
+  background: var(--color-bg);
+  cursor: not-allowed;
+}
+
+.schoolAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--color-line);
+  color: var(--color-ink-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex: 0 0 36px;
+}
+
+.schoolAvatarSelected {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.schoolBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.schoolName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.schoolSub {
+  font-size: 12px;
+  color: var(--color-ink-dim);
+  margin-top: 2px;
+}
+
+.schoolCheck {
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.error {
+  font-size: 12px;
+  color: var(--color-danger);
+  margin-top: 4px;
+}
+
+.doneBody {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.doneIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.doneText {
+  font-size: 14px;
+  color: var(--color-ink-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.pillBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: #fff;
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+}
+
+.pillBtnPrimary {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 14px rgba(201, 100, 66, 0.25);
+}
+
+@media (max-width: 720px) {
+  .nav {
+    padding: 22px 24px;
+  }
+  .stepConnector {
+    width: 24px;
+  }
+}

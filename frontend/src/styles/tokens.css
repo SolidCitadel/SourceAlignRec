@@ -1,0 +1,30 @@
+/* CSS vars mirror of src/styles/tokens.ts. Keep in sync. */
+
+:root {
+  --color-bg: #fbf5ec;
+  --color-bg-alt: #f5ecdc;
+  --color-surface: #ffffff;
+  --color-ink: #2b211a;
+  --color-ink-dim: #7a6a5e;
+  --color-ink-subtle: #a89888;
+  --color-line: #ecdfce;
+  --color-line-soft: #f3e8d4;
+  --color-primary: #c96442;
+  --color-primary-soft: #fbeee2;
+  --color-primary-hover: #b35636;
+  --color-sun: #f0a86b;
+  --color-ok: #7ba66a;
+  --color-warn: #d49640;
+  --color-danger: #c14a3a;
+
+  --shadow-base: 0 1px 0 rgba(180, 140, 100, 0.08), 0 8px 24px rgba(100, 60, 30, 0.07);
+  --shadow-lg: 0 1px 0 rgba(180, 140, 100, 0.08), 0 20px 40px rgba(100, 60, 30, 0.11);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --font-body: 'Pretendard', system-ui, -apple-system, sans-serif;
+  /* 영문/숫자만 JetBrains Mono. 한글은 Pretendard로 fallback — 시스템 모노(굴림 등) 회피. */
+  --font-mono: 'JetBrains Mono', 'Pretendard', ui-monospace, monospace;
+}
