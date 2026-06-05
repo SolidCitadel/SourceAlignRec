@@ -1,4 +1,4 @@
-# SourceAlignRec
+# SourceAlignRec — 비정형 강의 정보 기반 수강 추천 에이전트
 
 강의 소스(과목 설명·강의계획서·강의평)에서 추천 판단 근거를 구조화하고, 근거와 함께 현재 개설 강좌를 추천하는 대화형 수강 추천 시스템. 경희대학교 컴퓨터공학과 졸업프로젝트.
 
@@ -29,6 +29,90 @@ frontend/   Vite + React 19 + TypeScript + react-router 7 + TanStack Query + Zus
 | `db/models.py` | 전체 DB 스키마 (SQLModel) |
 
 오프라인 파이프라인 실행 순서와 CLI 전체 목록은 `backend/pyproject.toml`의 `[project.scripts]` 참조.
+
+## 시스템 아키텍처
+
+강의계획서 + 강의평을 구조화해 두고(Offline), 사용자 요청 시 필터링·유사도 검색·LLM 추천을 수행(Online)하는 구조. 엣지케이스 처리와 맥락 유지는 LLM의 추론 능력에 위임하고, 알고리즘 기반 점수 합산은 최소화한다.
+
+### Offline Pipeline — 강의 소스 구조화
+
+과목 데이터가 추가·변경될 때 실행. 결과는 DB에 저장.
+
+```mermaid
+flowchart TD
+    A(["강의평 목록"]) --> B["ReviewClassifier"]
+    B --> C["Noise 필터"]
+    B --> D["AttributeExtractor"]
+    D --> RA[("ReviewAttribute")]
+    RA --> F["Attribute 집계 (다수결)"]
+    F --> OA[("OfferingAttribute")]
+    SYL(["강의계획서"]) --> SA["exam_weight 파생"]
+    SA --> OA
+    C --> EMB["리뷰 임베딩"]
+    EMB --> G["대표 리뷰 선정\nDynamicScore"]
+    G --> RR[("RepresentativeReview")]
+    RR --> PR["교수 대표 리뷰 선정"]
+    PR --> PRR[("ProfessorRepresentativeReview")]
+    RR --> J["OfferingProfile 생성\n(LLM 요약)"]
+    PRR --> J
+    SYL --> J
+    J --> OP[("OfferingProfile")]
+    OP --> L["임베딩 → VectorDB"]
+```
+
+**ReviewClassifier** — `skt/A.X-Encoder-base` 기반 BERT fine-tuning multi-label 분류. 각 리뷰에 7개 타입(`grading` / `exam` / `assignment` / `attendance` / `teaching` / `topic` / `professor`) 레이블과 p-score를 부여하고, 어떤 타입에도 해당하지 않는 리뷰는 Noise로 필터링한다.
+
+**AttributeExtractor** — 분류기 p-score 기준으로 per-review 스코핑하여 Hard Filter용 구조화 속성을 추출한다 (단일 encoder + 4-head BERT). 분류기가 이미 "이 리뷰에 grading 내용이 있다"를 판단했으므로 추출기는 값 결정에만 집중해 FP를 억제한다. 리뷰 단위 추출 결과를 Course+Professor 기준 다수결로 집계한다.
+
+| Attribute | 소스 | 값 |
+|---|---|---|
+| `grading_leniency` | `grading` 리뷰 | 너그러움 / 깐깐함 |
+| `assignment_load` | `assignment` 리뷰 | 많음 / 적음 |
+| `team_project` | `assignment` 리뷰 | 있음 / 없음 |
+| `attendance_strictness` | `attendance` 리뷰 | 엄격함 / 너그러움 |
+| `exam_weight` | 강의계획서 | 높음 / 보통 / 낮음 |
+
+**대표 리뷰 선정 (DynamicScore)** — 타입 커버리지 기반 greedy selection. 임베딩 MMR 대신 타입 커버리지를 다양성의 직접 proxy로 사용한다.
+
+$$\text{DynamicScore}(r) = \left(\sum_{i \notin S_{\text{covered}}} P_i(r) + \lambda \sum_{i \in S_{\text{covered}}} P_i(r)\right) \times \text{Density}(r)$$
+
+- $P_i(r)$: 타입 $i$에 대한 분류기 p-score, $S_{\text{covered}}$: 이미 선정된 리뷰들이 커버한 타입 집합, $\lambda < 1$: 커버된 타입의 기여 감쇄 (새 타입 커버에 인센티브)
+- $\text{Density}(r)$: Gaussian KDE 기반 여론 대표성 — 주변 리뷰들과의 의미 유사도 평균. 내용이 희박한 리뷰는 Density가 낮아 자연 탈락한다.
+
+**OfferingProfile** — 강의계획서 구조화 필드 + 대표 리뷰(+ 리뷰 없는 과목은 교수 대표 리뷰)를 LLM으로 통합 요약. 이 문서가 pgvector 유사도 검색의 기준이자 Online 단계에서 LLM에게 전달되는 컨텍스트다.
+
+### Online Pipeline — 추천·대화
+
+사용자 요청마다 실행.
+
+```mermaid
+flowchart TD
+    UP(["User Profile"]) -->|"사전 제외"| Pool
+
+    Input(["사용자 입력"]) --> Form["Attribute Form"]
+    Input --> NL["자연어 질의"]
+
+    Form --> HF["Hard Filter"]
+    HF --> Pool["후보 과목 풀"]
+
+    NL --> Emb["임베딩"]
+    Emb --> Search["유사도 검색"]
+    Pool --> Search
+
+    Search --> SL["Shortlist"]
+    SL --> Ctx[("OfferingProfile + Attribute")]
+    Ctx --> LLM["LLM\n(대화 turn에서 get_reviews · get_syllabus 사용 가능)"]
+    LLM --> Result(["추천 결과"])
+```
+
+- **Hard Filter** — Attribute Form 다중 선택값에 해당하지 않는 과목만 제외. 속성 미확인 과목은 항상 포함.
+- **Shortlist** — 자연어 질의 임베딩과 OfferingProfile 임베딩의 유사도 상위 후보를 LLM에게 일괄 전달.
+- **추천 생성** — LLM이 후보별 OfferingProfile + Attribute 컨텍스트를 근거로 사용자 질의 맥락에 맞는 추천을 생성.
+
+시스템 책임은 두 모드로 분리된다 (`online/systems/system_e.py`, 라우터 노출 시스템):
+
+- **recommend** (stateless): `form_values + text_query` → 추천 K=3. 대화 history는 추천 결정에 사용하지 않으며, 선호가 바뀌면 사용자가 form/query를 갱신해 새 호출을 트리거한다 (CRS 표준 hybrid 패턴).
+- **conversation** (turn-based grounding): 추천 결과 위에서 후속 질문을 처리. LLM이 `get_reviews`(대표 리뷰 원문) / `get_syllabus`(강의계획서 구조화 필드) tool을 호출해 raw 데이터를 근거로 답변한다.
 
 ## 로컬 실행
 
