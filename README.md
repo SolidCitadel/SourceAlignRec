@@ -1,9 +1,8 @@
-# SourceAlignRec — 비정형 강의 정보 기반 수강 추천 에이전트
+# 비정형 강의 정보 기반 수강 추천 에이전트
 
-강의 소스(과목 설명·강의계획서·강의평)에서 추천 판단 근거를 구조화하고, 근거와 함께 현재 개설 강좌를 추천하는 대화형 수강 추천 시스템. 경희대학교 컴퓨터공학과 졸업프로젝트.
+강의 소스(과목 설명·강의계획서·강의평)에서 추천 판단 근거를 구조화하고, 근거와 함께 현재 개설 강좌를 추천하는 수강 추천 시스템
 
 - 서비스: [coursehub.kro.kr](https://coursehub.kro.kr)
-- 이 저장소는 최종 평가 제출용 소스코드입니다. 벤치마크 코드·데이터 수집 파이프라인·내부 문서는 제출 범위에서 제외했습니다.
 
 ## 구조
 
@@ -73,7 +72,7 @@ $$\text{DynamicScore}(r) = \left(\sum_{i \notin S_{\text{covered}}} P_i(r) + \la
 
 시스템 책임은 두 모드로 분리된다 (`online/systems/system_e.py`, 라우터 노출 시스템):
 
-- **recommend** (stateless): `form_values + text_query` → 추천 K=3. 대화 history는 추천 결정에 사용하지 않으며, 선호가 바뀌면 사용자가 form/query를 갱신해 새 호출을 트리거한다 (CRS 표준 hybrid 패턴).
+- **recommend** (stateless): `form_values + text_query` → 추천 K=3
 - **conversation** (turn-based grounding): 추천 결과 위에서 후속 질문을 처리. LLM이 `get_reviews`(대표 리뷰 원문) / `get_syllabus`(강의계획서 구조화 필드) tool을 호출해 raw 데이터를 근거로 답변한다.
 
 ## 로컬 실행
